@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+        <head>
+        {{ form.media }}
+                <title>Teachoo.com</title>
+        </head>
+
+        <body>
+                <h1>Add Topic</h1>
+                <form id="content_form" method="post" action="{% url 'create_category' %}">
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                        {% endfor %}
+
+                        {% for field in form.visible_fields %}
+                                {{ field.errors }}
+                                {{ field.help_text }}
+                                {{ field.label_tag }}: {{ field }}
+                        {% endfor %}
+                        <input type="submit" name"submit" value="content"/>
+                </form>
+
+</body>
+</html>
+

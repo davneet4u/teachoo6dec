@@ -1,0 +1,63 @@
+{% extends "content_management/content_management_base.html" %}
+{% load static %}
+{% block body %}
+
+<script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+<div class="container" style="text-align:center; padding-top:150px;" >
+	<h1 > I want to study...</h1>
+	<div class="row">
+		<div class="col-sm-3 col-sm-offset-3">
+			<select id="combo1" onchange="Dajaxice.content_management.update_subcategories(my_callback, {'category_id':this.value})" size="1" class="form-control" >
+				<option value="0">Select Topic</option>
+				{% if level1_categories %}
+				{% for category in level1_categories %}
+				<option value={{ category.id }}>{{ category.name }}</option>
+				{% endfor %}
+				{% endif %}
+			</select>
+		</div>
+		
+		<div class="col-sm-3">
+			<select id="combo2" size="1" class="form-control" disabled>
+				<option>Select Sub-Topic </option>
+			</select>
+		</div>
+
+		<div class="col-sm-1">
+			<a id="go" href = "" ><button type="button" class="btn btn-default" >Go....</button></a>
+		</div>
+	</div>
+	
+	<div class="row" style="padding-top:50px;">
+		<div class="col-md-4">
+			<a href="#" class="thumbnail">
+				<img src='{% static "html/img/accounts/350x150.jpg" %}' height="180px" width="300px">
+			</a>
+		</div>
+		
+		<div class="col-md-4">
+			<a href="#" class="thumbnail">
+				<img src='{%static "html/img/maths.jpg" %}' height="180px" width="300px">
+			</a>
+		</div>
+
+		<div class="col-md-4">
+			<a href="#" class="thumbnail">
+				<img src='{%static "html/img/tax.jpg" %}' height="180px" width="300px">
+			</a>
+		</div>
+</div>
+
+<script> 
+function my_callback(data){
+	Dajax.process(data);
+			$('#combo2').prop("disabled", false);
+  			$('#go').attr('href', $('#combo2').val())
+		}
+ $('#combo2, #combo1').on('change', function() {
+             $('#go').attr('href', $('#combo2').val())
+         })
+
+</script>
+{% endblock %}
+

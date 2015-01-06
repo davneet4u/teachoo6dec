@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+        <head>
+	<script src={% static "js/jquery-2.1.1.js" %}></script>
+	{{ form.media }}
+                <title>Teachoo.com</title>
+<script src="http://cdn.ckeditor.com/4.4.3/full/ckeditor.js"></script>
+        </head>
+
+        <body>
+                <h1>Add content</h1>
+                <form id="content_form" method="post" action="/create/post/">
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                        {% endfor %}
+
+                        {% for field in form.visible_fields %}
+                                {{ field.errors }}
+                                {{ field.help_text }}
+                                {{ field.label_tag }}: {{ field }}
+                        {% endfor %}
+			<textarea name="content" id="content" >
+               Create your page using this editor 
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+            </script>
+			<input type="submit" name="draft" value="Save as Draft"/>
+			<input type="submit" name="publish" value="Publish"/>
+		</form>
+
+
+
+</body>
+</html>
+

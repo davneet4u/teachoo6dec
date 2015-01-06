@@ -1,0 +1,4 @@
+django-1.5.4
+allauth
+django-dajaxice
+django-dajax
